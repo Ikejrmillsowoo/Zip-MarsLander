@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class DescentEvent {
     int Seconds = 0;
     int Velocity = 0;
@@ -10,6 +12,11 @@ public class DescentEvent {
         this.Velocity = sp;
         this.Fuel = f;
         this.Altitude = h;
+        this.Status = st;
+    }
+
+    public void setAltitude(int altitude) {
+        this.Altitude = altitude;
     }
 
     public int getVelocity() {
@@ -19,10 +26,18 @@ public class DescentEvent {
     public int getAltitude() {
         return this.Altitude;
     }
-    public int getStatus() { return this.Status; }
+
+    public int getStatus() {
+        return this.Status;
+    }
+
+    public void setStatus(int status) {
+        this.Status = status;
+    }
+
     @Override
     public String toString() {
-        String s = this.Seconds +"\t\t" + this.Velocity + " \t\t" + this.Fuel + " \t\t" + this.Altitude;
+        String s = this.Seconds + "\t\t" + this.Velocity + " \t\t" + this.Fuel + " \t\t" + this.Altitude;
         return s;
     }
 }

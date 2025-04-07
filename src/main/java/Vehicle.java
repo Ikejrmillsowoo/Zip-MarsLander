@@ -1,10 +1,12 @@
+import java.sql.SQLOutput;
+
 public class Vehicle {
 
 
     public Vehicle(int InitialAltitude) {
         // initialize the altitude AND previous altitude to initialAltitude
         this.Altitude = InitialAltitude;
-        this.PrevAltitude =InitialAltitude;
+        this.PrevAltitude = InitialAltitude;
     }
 
     int Gravity = 100;
@@ -31,6 +33,9 @@ public class Vehicle {
     int Flying = FLYING;
 
     public Vehicle() {}
+//    public Vehicle(){
+//
+//    }
 
     public String checkFinalStatus() {
         String s = "";
@@ -57,30 +62,33 @@ public class Vehicle {
 
     public int computeDeltaV() {
         // return velocity + gravity - burn amount
-        return (Velocity+Gravity)-Burn;
+        return (this.Velocity+this.Gravity)-this.Burn;
     }
 
     public void adjustForBurn(int burnAmount) {
+        if (burnAmount >200 || burnAmount<0){
+            throw  new IllegalArgumentException("Must Enter a Number (0-200)");
+        }
         // set burn to burnamount requested
         this.Burn = burnAmount;
         // save previousAltitude with current Altitude
         this.PrevAltitude = Altitude;
         // set new velocity to result of computeDeltaV function.
-        this.Velocity=computeDeltaV();
+        this.Velocity = computeDeltaV();
         // subtract speed from Altitude
         this.Altitude -= this.Velocity;
         // subtract burn amount fuel used from tank
-        Fuel -= burnAmount;
+        this.Fuel -= burnAmount;
     }
 
     public boolean stillFlying() {
         // return true if altitude is positive
 
-        return Altitude>0;
+        return this.Altitude>0;
     }
     public boolean outOfFuel() {
         // return true if fuel is less than or equal to zero
-        return Fuel<=0;
+        return this.Fuel<=0;
     }
 
     public DescentEvent getStatus(int tick) {
